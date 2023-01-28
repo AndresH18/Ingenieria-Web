@@ -16,7 +16,8 @@ body {
 }
 
 header {
-    align-self: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #main-container {
@@ -27,18 +28,7 @@ header {
 
 .side-bar {
     display: flex;
-
     width: 30%;
-    /* background: radial-gradient(50% 0,
-            rgba(255, 0, 0, 0.5),
-            rgba(255, 0, 0, 0) 70.71%),
-        radial-gradient(6.7% 75%,
-            rgba(0, 0, 255, 0.5),
-            rgba(0, 0, 255, 0) 70.71%),
-        radial-gradient(93.3% 75%,
-            rgba(0, 255, 0, 0.5),
-            rgba(0, 255, 0, 0) 70.71%) beige;
-    border-radius: 50%; */
     background-color: rgba(var(--background-color-dec), 0.8)
 }
 
@@ -51,8 +41,7 @@ header {
 
 menu {
     display: flex;
-    justify-content: space-between;
-    align-self: center;
+    justify-content: space-around;
 }
 
 .menu-item button {
@@ -68,9 +57,9 @@ menu {
 .menu-item>a>button:hover {
     border-color: #f1ff5c;
     color: white;
-    box-shadow: 0 0.5em 0.5em -0.4em #f1ff5c;
+    box-shadow: 0 1em 1em -0.4em #f1ff5c;
     transform-origin: center;
-    transform: translateY(-0.25em);
+    transform: translateY(-0.50em);
     cursor: pointer;
 }
 
@@ -86,6 +75,18 @@ menu {
     table-layout: fixed;
     padding: 1em;
     border: 3px solid yellow;
+}
+
+.poke-table tbody>tr:nth-child(even) {
+    background-color: #31546b;
+}
+
+.poke-table tbody>tr:nth-child(odd) {
+    background-color: #1c313f;
+}
+
+.poke-table thead {
+    background-color: #19316b;
 }
 
 .poke-table img {
@@ -134,6 +135,7 @@ footer {
     padding: 10px 100px;
 }
 
-h2 {
+h2,
+h1 {
     text-align: center;
 }
