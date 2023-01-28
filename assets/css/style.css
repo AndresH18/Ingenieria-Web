@@ -1,0 +1,139 @@
+:root {
+    --background-color: #151b29;
+    --background-color-dec: 21, 27, 41;
+    --menu-button-color-primary: #FFA260;
+    --footer-background-color: rgb(59, 63, 73);
+}
+
+body {
+    background-color: var(--background-color);
+    background-image: url(../images/body_bg.png);
+    background-size: 20%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    align-self: center;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.side-bar {
+    display: flex;
+
+    width: 30%;
+    /* background: radial-gradient(50% 0,
+            rgba(255, 0, 0, 0.5),
+            rgba(255, 0, 0, 0) 70.71%),
+        radial-gradient(6.7% 75%,
+            rgba(0, 0, 255, 0.5),
+            rgba(0, 0, 255, 0) 70.71%),
+        radial-gradient(93.3% 75%,
+            rgba(0, 255, 0, 0.5),
+            rgba(0, 255, 0, 0) 70.71%) beige;
+    border-radius: 50%; */
+    background-color: rgba(var(--background-color-dec), 0.8)
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    width: 70%;
+}
+
+menu {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.menu-item button {
+    background: none;
+    color: var(--menu-button-color-primary);
+    border: 2px solid;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    transition-property: transform, color, box-shadow, border-color;
+    transition-duration: 0.25s;
+}
+
+.menu-item>a>button:hover {
+    border-color: #f1ff5c;
+    color: white;
+    box-shadow: 0 0.5em 0.5em -0.4em #f1ff5c;
+    transform-origin: center;
+    transform: translateY(-0.25em);
+    cursor: pointer;
+}
+
+.poke-ranking {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.poke-table {
+    background-color: var(--background-color);
+    width: 50%;
+    table-layout: fixed;
+    padding: 1em;
+    border: 3px solid yellow;
+}
+
+.poke-table img {
+    width: 75px;
+    transition-property: scale, translate;
+    transition-duration: 0.25s;
+}
+
+.poke-table img:nth-child(odd):hover {
+    scale: 7;
+    translate: -200px;
+}
+
+/* .poke-table img:nth-child(even) {
+    display: none;
+}
+
+.poke-table img:nth-child(odd):hover + img:nth-child(even) {
+    display: inline;
+    translate: 50% 50%;
+} */
+
+.poke-table a {
+    text-decoration: none;
+    color: white;
+}
+
+.poke-table td {
+    text-align: center;
+}
+
+caption {
+    caption-side: bottom;
+}
+
+#poke-icon {
+    vertical-align: middle;
+    width: 10%;
+}
+
+footer {
+    align-self: center;
+    text-align: center;
+    background-color: var(--footer-background-color);
+    width: 100%;
+    padding: 10px 100px;
+}
+
+h2 {
+    text-align: center;
+}
