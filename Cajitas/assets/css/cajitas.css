@@ -1,0 +1,37 @@
+body {
+    margin: 0px;
+    text-decoration: none;
+}
+
+.general {
+    margin: 0 auto;
+    margin-top: 2%;
+    text-align: center;
+    border: 10px solid black;
+    width: 70%;
+}
+
+.general header {
+    background-color: rgba(123, 123, 123, 0.3);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100px;
+    text-align: center;
+    width: 100%;
+}
+
+.menu {
+    background-color: magenta;
+}
+
+.menu ul li {
+    border-left: 1px solid green;
+    display: block;
+    float: left;
+    margin: 2px;
+    padding: 10px;
+}
+
+.clear-fix {
+    float: none;
+    clear: both;
+}
