@@ -1,0 +1,17 @@
+body {
+    background-color: gray;
+}
+
+section 
+{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-template-rows: 100px 100px;
+}
+
+section > section {
+    background-color: cyan;
+    display: grid;
+    grid-template-columns: 30% 30%;
+    grid-template-rows: 20px 20px 20px 20px;
+}

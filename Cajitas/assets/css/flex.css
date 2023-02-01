@@ -1,0 +1,55 @@
+:root {
+    --main-background-color: gray;
+}
+
+body {
+    background-color: var(--main-background-color);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.flex1 {
+    background-color: red;
+    width: 10%;
+}
+
+.flex2 {
+    background-color: blue;
+    width: 30%;
+}
+
+.flex3 {
+    background-color: green;
+    width: 30%;
+}
+
+.flex4 {
+    background-color: orange;
+    width: 10%;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* esto aplica valores dependiendo del tamaño */
+@media(max-width:600px) {
+    body {
+        background-color: cyan;
+    }
+
+    .container {
+        align-items: center;
+        background-color: #ccc;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 200px;
+        justify-content: space-between;
+    }
+
+}
