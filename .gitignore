@@ -1,4 +1,6 @@
-﻿# Pokemon
+﻿# root
+/.idea
+# Pokemon
 /Pokemon/Pokemon/obj/
 /Pokemon/Pokemon/bin/
 /Pokemon/.idea
