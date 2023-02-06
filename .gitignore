@@ -2,6 +2,8 @@
 /Pokemon/Pokemon/obj/
 /Pokemon/Pokemon/bin/
 /Pokemon/.idea
+/Pokemon/*/bin
+/Pokemon/*/obj
 /Pokemon/Pokemon/wwwroot/lib/bootstrap/dist
 /Pokemon/Pokemon/wwwroot/lib/bootstrap/LICENSE
 /Pokemon/Pokemon/wwwroot/lib/font-awesome
