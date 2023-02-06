@@ -7,6 +7,7 @@ Console.WriteLine("Hello, World!");
 var client = new PokeApiClient();
 var pokemon = await client.GetResourceAsync<Pokemon>("lucario");
 Console.WriteLine(pokemon.Name);
+Console.WriteLine("Default sprite: {0}", pokemon.Sprites.Other.OfficialArtwork.FrontDefault);
 
 var species = await client.GetResourceAsync(pokemon.Species);
 
