@@ -1,7 +1,12 @@
+using Pokemon.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddWebServices();
 
 var app = builder.Build();
 
@@ -21,5 +26,23 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+/* Map routes templates manually.
+ Any route that has controller/action is valid. Since we are setting default values ("=home", "=index")
+ routes without action will received by "home/index" in "home", routes with neither controller and route will be received by "home/index".
+    /
+    /home
+    /home/index
+ */
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=home}/{action=index}"); // aplica para toda ruta que sea un controlador seguido de una accion.
+//
+
+// use attribute route mapping 
+// app.MapControllers();
+
+// use default route mapping 
+app.MapDefaultControllerRoute();
+
 
 app.Run();
