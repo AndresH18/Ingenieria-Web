@@ -41,7 +41,7 @@ app.MapRazorPages();
 // use attribute route mapping 
 // app.MapControllers();
 
-// use default route mapping 
+// use default route mapping "{controller=home}/{action=index}/{id?}
 app.MapDefaultControllerRoute();
 
 
