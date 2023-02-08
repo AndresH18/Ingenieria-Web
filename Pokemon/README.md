@@ -1,6 +1,6 @@
 ﻿# Pokemon Page
 
-Pagina Web usando Asp.Net Core, que se conecta con la **API** de [Pokemon](https://pokeapi.co/). Utiliza los *wrappers* de [PokeApiNnet](https://github.com/mtrdp642/PokeApiNet) [![NuGet](https://img.shields.io/nuget/v/PokeApiNet.svg?logo=nuget)](https://www.nuget.org/packages/PokeApiNet).
+Pagina Web usando Asp.Net Core, que se conecta con la **API** de [Pokemon](https://pokeapi.co/). Utiliza los *wrappers* de [PokeApiNet](https://github.com/mtrdp642/PokeApiNet) [![NuGet](https://img.shields.io/nuget/v/PokeApiNet.svg?logo=nuget)](https://www.nuget.org/packages/PokeApiNet).
 
 ## Librerias
 
