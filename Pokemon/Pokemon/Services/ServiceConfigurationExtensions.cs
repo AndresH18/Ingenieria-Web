@@ -4,7 +4,7 @@ namespace Pokemon.Services;
 
 public static class ServiceConfigurationExtensions
 {
-    public static IServiceCollection AddWebServices(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddPokemonServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<PokeApiClient>();
         
