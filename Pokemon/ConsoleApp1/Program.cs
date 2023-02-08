@@ -28,3 +28,6 @@ void EvolutionChainSpecies(ChainLink chainLink)
         chainLink.EvolvesTo.ForEach(EvolutionChainSpecies);
     }
 }
+
+var page = await client.GetNamedResourcePageAsync<Pokemon>();
+Console.WriteLine("Total results for pokemon page: {0}", page.Count);
