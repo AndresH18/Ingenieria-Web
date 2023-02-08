@@ -25,5 +25,9 @@ public class PokemonServiceTests
         Assert.NotNull(result);
         Assert.NotEmpty(result);
         Assert.True(result.Length == list.Count);
+        for (var i = 0; i < list.Count; i++)
+        {
+            Assert.Equal(result[i], list[i]);
+        }
     }
 }
