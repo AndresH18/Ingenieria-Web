@@ -3,7 +3,7 @@ using Pokemon.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// builder.Services.AddRazorPages(); // this enables the services required by razor pages
+builder.Services.AddRazorPages(); // this enables the services required by razor pages
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddPokemonServices();
@@ -25,7 +25,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// app.MapRazorPages(); // this enable razor pages to be accessed by the routing middleware
+app.MapRazorPages(); // this enable razor pages to be accessed by the routing middleware
 
 /* Map routes templates manually.
  Any route that has controller/action is valid. Since we are setting default values ("=home", "=index")
