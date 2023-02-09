@@ -34,4 +34,14 @@ public class PokemonService
 
         return new PokemonListViewModel { Pokemon = pokemonList.ToList() };
     }
+
+    public void Get(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Get(string name)
+    {
+        throw new NotImplementedException();
+    }
 }
