@@ -34,11 +34,4 @@ public class PokemonService
 
         return new PokemonListViewModel { Pokemon = pokemonList.ToList() };
     }
-
-    // public async Task<IEnumerable<string>> GetPageAsync(int pageOffset = 0)
-    // {
-    //     var pokemonList = (await _client.GetNamedResourcePageAsync<Poke::Pokemon>(100, pageOffset)).Results;
-    //
-    //     return pokemonList.Select(p => p.Name).ToList();
-    // }
 }
