@@ -23,9 +23,9 @@ public class PokemonService
 
     public int ItemsPerPage { get; set; } = 100;
 
-    public async Task<PokemonListViewModel> GetPageAsync(int offset = 0)
+    public async Task<PokemonListViewModel> GetPageAsync(int pageOffset = 0)
     {
-        var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, offset);
+        var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, pageOffset * ItemsPerPage);
 
         var pokemonList = from p in (await _client.GetResourceAsync(page.Results))
             select new PokemonData
@@ -37,9 +37,9 @@ public class PokemonService
         return new PokemonListViewModel() { Pokemon = pokemonList.ToList() };
     }
 
-    // public async Task<IEnumerable<string>> GetPageAsync(int offset = 0)
+    // public async Task<IEnumerable<string>> GetPageAsync(int pageOffset = 0)
     // {
-    //     var pokemonList = (await _client.GetNamedResourcePageAsync<Poke::Pokemon>(100, offset)).Results;
+    //     var pokemonList = (await _client.GetNamedResourcePageAsync<Poke::Pokemon>(100, pageOffset)).Results;
     //
     //     return pokemonList.Select(p => p.Name).ToList();
     // }
