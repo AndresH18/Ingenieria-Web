@@ -1,5 +1,4 @@
-﻿using Moq;
-using PokeApiNet;
+﻿using PokeApiNet;
 using Pokemon.Services;
 
 namespace Pokemon.Tests;
@@ -14,7 +13,7 @@ public class PokemonServiceTests
         var service = new PokemonService(client) { ItemsPerPage = 5 };
 
         // act
-        var page1 = (await service.GetPageAsync(0)).Pokemon.OrderBy(p => p.Id).ToArray();
+        var page1 = (await service.GetPageAsync()).Pokemon.OrderBy(p => p.Id).ToArray();
         var page2 = (await service.GetPageAsync(1)).Pokemon.OrderBy(p => p.Id).ToArray();
 
         // assert

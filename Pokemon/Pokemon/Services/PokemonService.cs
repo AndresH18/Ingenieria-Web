@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Pokemon.Models.ViewModels;
+﻿using Pokemon.Models.ViewModels;
 using Poke = PokeApiNet;
 
 
@@ -17,7 +15,7 @@ public class PokemonService
     public PokemonService(Poke::PokeApiClient client)
     {
         _client = client;
-        _client.GetNamedResourcePageAsync<Poke::Pokemon>().ContinueWith((result) => { _total = result.Result.Count; });
+        _client.GetNamedResourcePageAsync<Poke::Pokemon>().ContinueWith(result => { _total = result.Result.Count; });
         // _parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 3 };
     }
 
@@ -27,14 +25,14 @@ public class PokemonService
     {
         var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, pageOffset * ItemsPerPage);
 
-        var pokemonList = from p in (await _client.GetResourceAsync(page.Results))
+        var pokemonList = from p in await _client.GetResourceAsync(page.Results)
             select new PokemonData
             {
                 Id = p.Id, Name = p.Name,
                 GifSprite = p.Sprites.Versions.GenerationV.BlackWhite.Animated.FrontDefault
             };
 
-        return new PokemonListViewModel() { Pokemon = pokemonList.ToList() };
+        return new PokemonListViewModel { Pokemon = pokemonList.ToList() };
     }
 
     // public async Task<IEnumerable<string>> GetPageAsync(int pageOffset = 0)
