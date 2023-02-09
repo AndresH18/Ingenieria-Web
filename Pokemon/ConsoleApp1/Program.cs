@@ -29,5 +29,12 @@ void EvolutionChainSpecies(ChainLink chainLink)
     }
 }
 
-var page = await client.GetNamedResourcePageAsync<Pokemon>();
+var page = await client.GetNamedResourcePageAsync<Pokemon>(10, 0);
 Console.WriteLine("Total results for pokemon page: {0}", page.Count);
+
+var pokemonList = await client.GetResourceAsync(page.Results);
+
+Console.WriteLine("Getting data using Page link");
+
+pokemonList.ForEach(p =>
+    Console.WriteLine($"name: {p.Name}, gif: {p.Sprites.Versions.GenerationV.BlackWhite.Animated.FrontDefault}"));

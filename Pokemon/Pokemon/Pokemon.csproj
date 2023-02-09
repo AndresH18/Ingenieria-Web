@@ -11,4 +11,8 @@
       <PackageReference Include="PokeApiNet" Version="3.0.10" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\ViewModels\" />
+    </ItemGroup>
+
 </Project>
