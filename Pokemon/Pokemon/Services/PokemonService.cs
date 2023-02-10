@@ -1,4 +1,5 @@
-﻿using Pokemon.Models.ViewModels;
+﻿using System.Net;
+using Pokemon.Models.ViewModels;
 using Poke = PokeApiNet;
 
 
@@ -26,22 +27,49 @@ public class PokemonService
         var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, pageOffset * ItemsPerPage);
 
         var pokemonList = from p in await _client.GetResourceAsync(page.Results)
-            select new PokemonData
-            {
-                Id = p.Id, Name = p.Name,
-                GifSprite = p.Sprites.Versions.GenerationV.BlackWhite.Animated.FrontDefault
-            };
+            select new PokemonData(p);
 
-        return new PokemonListViewModel { Pokemon = pokemonList.ToList() };
+        return new PokemonListViewModel {Pokemon = pokemonList.ToList()};
     }
 
-    public void Get(int id)
+    public async Task<PokemonData?> Get(int id)
     {
-        throw new NotImplementedException();
+        if (id <= 0)
+            return default;
+
+        Poke::Pokemon? pokemon;
+        try
+        {
+            pokemon = await _client.GetResourceAsync<Poke::Pokemon>(id);
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+                return default;
+
+            throw;
+        }
+
+        return pokemon == null! ? default : new PokemonData(pokemon);
     }
 
-    public void Get(string name)
+    public async Task<PokemonData?> Get(string name)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(name))
+            return default;
+
+        Poke::Pokemon? pokemon;
+        try
+        {
+            pokemon = await _client.GetResourceAsync<Poke::Pokemon>(name);
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+                return default;
+            throw;
+        }
+
+        return pokemon == null! ? default : new PokemonData(pokemon);
     }
 }
