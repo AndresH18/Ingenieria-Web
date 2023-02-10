@@ -8,11 +8,9 @@ namespace Pokemon.Services;
 public class PokemonService
 {
     private readonly Poke::PokeApiClient _client;
-
     // private readonly ParallelOptions _parallelOptions;
     private int _total;
-
-
+    
     public PokemonService(Poke::PokeApiClient client)
     {
         _client = client;

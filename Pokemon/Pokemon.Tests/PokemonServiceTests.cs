@@ -90,7 +90,7 @@ public class PokemonServiceTests
 
         // act
         var pokemon = await service.Get(string.Empty);
-        
+
         // assert
         Assert.Null(pokemon);
     }
@@ -104,7 +104,7 @@ public class PokemonServiceTests
 
         // act
         var pokemon = await service.Get("chihuahua");
-        
+
         // assert
         Assert.Null(pokemon);
     }
