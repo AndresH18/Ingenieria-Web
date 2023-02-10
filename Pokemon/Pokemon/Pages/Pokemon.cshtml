@@ -1,7 +1,14 @@
 ﻿@page
+@using Pokemon.Models.ViewModels
 @model PokemonModel
 @{
     ViewData["Title"] = "Pokemon";
 }
 
-<h1>Hellow</h1>
+<h1>Pokemons</h1>
+<ul>
+    @foreach (var pokemonData in Model.PokemonViewModel?.Pokemon ?? Enumerable.Empty<PokemonData>())
+    {
+        <li>@pokemonData.Name</li>
+    }
+</ul>
