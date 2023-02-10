@@ -8,7 +8,7 @@ public static class ServiceConfigurationExtensions
     {
         services.AddSingleton<PokeApiClient>();
         services.AddSingleton<PokemonService>();
-        
+
         return services;
     }
 }
