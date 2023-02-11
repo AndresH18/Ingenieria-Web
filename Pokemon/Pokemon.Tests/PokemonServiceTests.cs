@@ -5,12 +5,18 @@ namespace Pokemon.Tests;
 
 public class PokemonServiceTests
 {
+    private readonly PokeApiClient _client;
+
+    public PokemonServiceTests()
+    {
+        _client = new PokeApiClient();
+    }
+
     [Fact]
     public async void Can_Paginate()
     {
         // arrange 
-        var client = new PokeApiClient();
-        var service = new PokemonService(client) {ItemsPerPage = 5};
+        var service = new PokemonService(_client) { ItemsPerPage = 5 };
 
         // act
         var page1 = (await service.GetPageAsync()).Pokemon.OrderBy(p => p.Id).ToArray();
@@ -27,8 +33,7 @@ public class PokemonServiceTests
     public async void Can_Get_By_Id()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client) {ItemsPerPage = 3};
+        var service = new PokemonService(_client) { ItemsPerPage = 3 };
 
         // act 
         var pokemon = await service.Get(145);
@@ -42,8 +47,7 @@ public class PokemonServiceTests
     public async void Get_NegativeNumber_ReturnsNull()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client);
+        var service = new PokemonService(_client);
 
         // act
         var pokemon = await service.Get(-1);
@@ -56,8 +60,7 @@ public class PokemonServiceTests
     public async void Get_Id_NotExists()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client);
+        var service = new PokemonService(_client);
 
         // act
         var pokemon = await service.Get(int.MaxValue);
@@ -70,8 +73,7 @@ public class PokemonServiceTests
     public async void Can_Get_By_Name()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client);
+        var service = new PokemonService(_client);
 
         // act
         var pokemon = await service.Get("lucario");
@@ -85,8 +87,7 @@ public class PokemonServiceTests
     public async void Get_Blank_ReturnsNull()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client);
+        var service = new PokemonService(_client);
 
         // act
         var pokemon = await service.Get(string.Empty);
@@ -99,8 +100,7 @@ public class PokemonServiceTests
     public async void Get_NameNotExists_ReturnsNull()
     {
         // arrange
-        var client = new PokeApiClient();
-        var service = new PokemonService(client);
+        var service = new PokemonService(_client);
 
         // act
         var pokemon = await service.Get("chihuahua");
