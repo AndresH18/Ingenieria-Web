@@ -21,7 +21,7 @@ public class PokemonService
 
     public int ItemsPerPage { get; set; } = 10;
 
-    public async Task<PokemonListViewModel> GetPageAsync(uint pageOffset = 0)
+    public async Task<PokemonListViewModel> GetPageAsync(int pageOffset = 0)
     {
         var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, pageOffset * ItemsPerPage);
 
