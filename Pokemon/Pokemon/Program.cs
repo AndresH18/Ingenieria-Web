@@ -45,5 +45,4 @@ app.MapRazorPages(); // this enable razor pages to be accessed by the routing mi
 // use default route mapping "{controller=home}/{action=index}/{id?}
 app.MapDefaultControllerRoute();
 
-
 app.Run();

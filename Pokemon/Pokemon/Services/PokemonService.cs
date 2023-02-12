@@ -8,9 +8,10 @@ namespace Pokemon.Services;
 public class PokemonService
 {
     private readonly Poke::PokeApiClient _client;
+
     // private readonly ParallelOptions _parallelOptions;
     private int _total;
-    
+
     public PokemonService(Poke::PokeApiClient client)
     {
         _client = client;
@@ -18,16 +19,24 @@ public class PokemonService
         // _parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 3 };
     }
 
-    public int ItemsPerPage { get; set; } = 100;
+    public int ItemsPerPage { get; set; } = 10;
 
-    public async Task<PokemonListViewModel> GetPageAsync(int pageOffset = 0)
+    public async Task<PokemonListViewModel> GetPageAsync(uint pageOffset = 0)
     {
         var page = await _client.GetNamedResourcePageAsync<Poke::Pokemon>(ItemsPerPage, pageOffset * ItemsPerPage);
 
         var pokemonList = from p in await _client.GetResourceAsync(page.Results)
             select new PokemonData(p);
 
-        return new PokemonListViewModel {Pokemon = pokemonList.ToList()};
+        return new PokemonListViewModel
+        {
+            Pokemon = pokemonList.ToList(), PageInfo = new PageInfo
+            {
+                CurrentPage = pageOffset,
+                ItemsPerPage = ItemsPerPage,
+                TotalItems = _total
+            }
+        };
     }
 
     public async Task<PokemonData?> Get(int id)

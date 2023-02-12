@@ -1,14 +1,42 @@
-﻿@page
-@using Pokemon.Models.ViewModels
+﻿@page "/{id:int?}"
 @model PokemonModel
 @{
     ViewData["Title"] = "Pokemon";
 }
 
 <h1>Pokemons</h1>
-<ul>
-    @foreach (var pokemonData in Model.PokemonViewModel?.Pokemon ?? Enumerable.Empty<PokemonData>())
-    {
-        <li>@pokemonData.Name</li>
-    }
-</ul>
+<p>Total Pages: @Model.TotalPages</p>
+<div>
+    <ul class="list-group">
+        @foreach (var pokemonData in Model.PokemonViewModel?.Pokemon ?? Enumerable.Empty<PokemonData>())
+        {
+            <li class="list-group-item container-fluid row">
+                <span class="col-1">#@pokemonData.Id</span>
+                <img class="col-1" src="@pokemonData.GifSprite" alt="gif sprite @pokemonData.Name"/>
+                <span class="col">@pokemonData.Name.ToUpper()</span>
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="mt-2">
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(Model.CurrentPage == 0 ? "disabled" : "")">
+                <a href="@(Model.GetPageUrl(Model.CurrentPage - 1))" class="page-link"> Previous</a>
+            </li>
+            <li class="page-item @(Model.IsPageSelected(0) ? "active" : "")">
+                <a href="@(Model.GetPageUrl(Model.CurrentPage - 1))" class="page-link">@Model.GetPageNumber(-1)</a>
+            </li>
+            <li class="page-item @(Model.IsPageSelected(1) ? "active" : "")">
+                <a href="@(Model.GetPageUrl(Model.CurrentPage))" class="page-link">@Model.GetPageNumber(0)</a>
+            </li>
+            <li class="page-item @(Model.IsPageSelected(2) ? "active" : "")">
+                <a href="@(Model.GetPageUrl(Model.CurrentPage + 1))" class="page-link">@Model.GetPageNumber(1)</a>
+            </li>
+            <li class="page-item @(Model.IsPageSelected(2) ? "disabled" : "")">
+                <a href="" class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
