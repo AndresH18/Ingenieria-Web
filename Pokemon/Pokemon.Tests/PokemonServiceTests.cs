@@ -103,7 +103,7 @@ public class PokemonServiceTests
         var service = new PokemonService(_client);
 
         // act
-        var pokemon = await service.Get("chihuahua");
+        var pokemon = await service.Get("perrito");
 
         // assert
         Assert.Null(pokemon);
