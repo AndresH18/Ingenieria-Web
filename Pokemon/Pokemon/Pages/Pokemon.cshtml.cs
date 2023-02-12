@@ -22,15 +22,18 @@ namespace Pokemon.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            if (Id >= 0)
-            {
-                PokemonViewModel = await _service.GetPageAsync(Id);
+            if (Id < 0 || (Id >= _service.TotalPages && _service.TotalPages != 0))
+                return RedirectToPage("/Error");
 
-                return Page();
-            }
+            PokemonViewModel = await _service.GetPageAsync(Id);
 
-            return RedirectToPage("/Error");
+            return Page();
         }
+
+        // public IActionResult OnGetSearch()
+        // {
+        //     return RedirectToAction("OnGet" /*, new { Id = id - 1 }*/);
+        // }
 
         public bool IsPageSelected(int index)
         {
@@ -43,14 +46,35 @@ namespace Pokemon.Pages
             };
         }
 
-        public string GetPageUrl(int? page)
-        {
-            if (page >= 0 && TotalPages >= page)
-            {
-                return Url.Action("", new { Id = page }) ?? string.Empty;
-            }
+        // public string GetPageUrl(int? page)
+        // {
+        //     if (page >= 0 && _total >= page)
+        //     {
+        //         return Url.Action("", new { Id = page }) ?? string.Empty;
+        //     }
+        //
+        //     return "";
+        // }
 
-            return "";
+        public string GetPageUrl(int? index)
+        {
+            var d = index switch
+            {
+                -1 when CurrentPage == 0 => 0,
+                0 when CurrentPage == 0 => 1,
+                1 when CurrentPage == 0 => 2,
+
+                -1 when CurrentPage >= TotalPages => CurrentPage - 2,
+                0 when CurrentPage >= TotalPages => CurrentPage - 1,
+                1 when CurrentPage >= TotalPages => CurrentPage,
+
+                -1 => CurrentPage - 1,
+                0 => CurrentPage,
+                1 => CurrentPage + 1,
+
+                _ => 0,
+            };
+            return Url.Action("", new { Id = d }) ?? string.Empty;
         }
 
         public string? GetPageNumber(int offset)

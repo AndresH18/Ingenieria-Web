@@ -1,0 +1,15 @@
+﻿@page "/Pokemon"
+@model PokemonInfoModel
+
+
+<div class="container">
+    <div class="row row-cols-1">
+        <div class="col-3">
+            <img src="@Model.Data?.OfficialArt" alt="@(Model.Data?.Name) official-artwork"/>
+        </div>
+
+        <div class="col">
+            Data
+        </div>
+    </div>
+</div>
