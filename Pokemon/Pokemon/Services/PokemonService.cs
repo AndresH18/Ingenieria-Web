@@ -9,13 +9,16 @@ public class PokemonService
 {
     private readonly Poke::PokeApiClient _client;
 
+    private readonly ILogger<PokemonService> _logger;
+
     // private readonly ParallelOptions _parallelOptions;
     private int _total;
 
-    public PokemonService(Poke::PokeApiClient client)
+    public PokemonService(Poke::PokeApiClient client, ILogger<PokemonService> logger)
     {
         _client = client;
         _client.GetNamedResourcePageAsync<Poke::Pokemon>().ContinueWith(result => { _total = result.Result.Count; });
+        _logger = logger;
         // _parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 3 };
     }
 
@@ -55,7 +58,12 @@ public class PokemonService
         {
             if (ex.StatusCode == HttpStatusCode.NotFound)
                 return default;
-
+            _logger.LogError(ex, "Http client error while making request to api");
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unknown error while processing ");
             throw;
         }
 
@@ -76,6 +84,13 @@ public class PokemonService
         {
             if (ex.StatusCode == HttpStatusCode.NotFound)
                 return default;
+            _logger.LogError(ex, "Http client error while making request to api");
+
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unknown error while processing ");
             throw;
         }
 

@@ -1,4 +1,6 @@
-﻿using PokeApiNet;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
+using PokeApiNet;
 using Pokemon.Services;
 
 namespace Pokemon.Tests;
@@ -16,7 +18,8 @@ public class PokemonServiceTests
     public async void Can_Paginate()
     {
         // arrange 
-        var service = new PokemonService(_client) { ItemsPerPage = 5 };
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object) { ItemsPerPage = 5 };
 
         // act
         var page1 = (await service.GetPageAsync()).Pokemon.OrderBy(p => p.Id).ToArray();
@@ -33,7 +36,8 @@ public class PokemonServiceTests
     public async void Can_Get_By_Id()
     {
         // arrange
-        var service = new PokemonService(_client) { ItemsPerPage = 3 };
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object) { ItemsPerPage = 3 };
 
         // act 
         var pokemon = await service.Get(145);
@@ -47,7 +51,8 @@ public class PokemonServiceTests
     public async void Get_NegativeNumber_ReturnsNull()
     {
         // arrange
-        var service = new PokemonService(_client);
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object);
 
         // act
         var pokemon = await service.Get(-1);
@@ -60,7 +65,8 @@ public class PokemonServiceTests
     public async void Get_Id_NotExists()
     {
         // arrange
-        var service = new PokemonService(_client);
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object);
 
         // act
         var pokemon = await service.Get(int.MaxValue);
@@ -73,7 +79,8 @@ public class PokemonServiceTests
     public async void Can_Get_By_Name()
     {
         // arrange
-        var service = new PokemonService(_client);
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object);
 
         // act
         var pokemon = await service.Get("lucario");
@@ -87,7 +94,8 @@ public class PokemonServiceTests
     public async void Get_Blank_ReturnsNull()
     {
         // arrange
-        var service = new PokemonService(_client);
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object);
 
         // act
         var pokemon = await service.Get(string.Empty);
@@ -100,7 +108,8 @@ public class PokemonServiceTests
     public async void Get_NameNotExists_ReturnsNull()
     {
         // arrange
-        var service = new PokemonService(_client);
+        var logMock = new Mock<ILogger<PokemonService>>();
+        var service = new PokemonService(_client, logMock.Object);
 
         // act
         var pokemon = await service.Get("perrito");
