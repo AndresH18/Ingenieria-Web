@@ -20,12 +20,16 @@ namespace Pokemon.Pages
         public int? CurrentPage => PokemonViewModel?.PageInfo.CurrentPage;
         public int? TotalPages => PokemonViewModel?.PageInfo.TotalPages - 1;
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            if (Id > 0)
+            if (Id >= 0)
             {
-                PokemonViewModel = await _service.GetPageAsync(Id - 1);
+                PokemonViewModel = await _service.GetPageAsync(Id);
+
+                return Page();
             }
+
+            return RedirectToPage("/Error");
         }
 
         public bool IsPageSelected(int index)

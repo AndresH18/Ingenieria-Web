@@ -8,18 +8,17 @@ public class PokemonListViewModel
 
 public class PokemonData
 {
-    public PokemonData()
-    {
-    }
-
     internal PokemonData(PokeApiNet.Pokemon pokemon)
     {
         Id = pokemon.Id;
         Name = pokemon.Name;
         GifSprite = pokemon.Sprites.Versions.GenerationV.BlackWhite.Animated.FrontDefault;
+        OfficialArt = pokemon.Sprites.Other.OfficialArtwork.FrontDefault;
     }
 
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string GifSprite { get; set; } = string.Empty;
+    public int Id { get; }
+    public string Name { get; }
+    public string GifSprite { get; }
+
+    public string OfficialArt { get; }
 }

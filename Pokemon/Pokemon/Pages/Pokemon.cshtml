@@ -12,7 +12,7 @@
         {
             <li class="list-group-item container-fluid row">
                 <span class="col-1">#@pokemonData.Id</span>
-                <img class="col-1" src="@pokemonData.GifSprite" alt="gif sprite @pokemonData.Name"/>
+                <img class="col-1" src="@pokemonData.OfficialArt" alt="@pokemonData.Name official artwork"/>
                 <span class="col">@pokemonData.Name.ToUpper()</span>
             </li>
         }
@@ -35,7 +35,7 @@
                 <a href="@(Model.GetPageUrl(Model.CurrentPage + 1))" class="page-link">@Model.GetPageNumber(1)</a>
             </li>
             <li class="page-item @(Model.IsPageSelected(2) ? "disabled" : "")">
-                <a href="" class="page-link">Next</a>
+                <a href="@(Model.GetPageUrl(Model.CurrentPage + 1))" class="page-link">Next</a>
             </li>
         </ul>
     </nav>
