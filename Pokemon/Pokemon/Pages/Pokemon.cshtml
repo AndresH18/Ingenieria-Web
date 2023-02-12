@@ -14,7 +14,7 @@
         @foreach (var pokemonData in Model.PokemonViewModel?.Pokemon ?? Enumerable.Empty<PokemonData>())
         {
             <li class="list-group-item container-fluid row">
-                <a asp-page="/PokemonInfo" asp-route-name="@pokemonData.Name" class="text-decoration-none text-black">
+                <a asp-page="/PokemonInfo" asp-route-Name="@pokemonData.Name" class="text-decoration-none text-black">
                     <span class="col-1">#@pokemonData.Id</span>
                     <img class="col-1" src="@pokemonData.OfficialArt" alt="@pokemonData.Name official artwork"/>
                     <span class="col">@pokemonData.Name.ToUpper()</span>

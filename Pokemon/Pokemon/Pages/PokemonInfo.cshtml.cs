@@ -19,15 +19,18 @@ public class PokemonInfoModel : PageModel
 
     //
     // [BindProperty(SupportsGet = true)] public int Id { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string Name { get; set; }
     public PokemonData? Data { get; private set; }
 
-    public async Task<IActionResult> OnGet(string name)
+    public async Task<IActionResult> OnGet()
     {
-        if (string.IsNullOrWhiteSpace(name))
+        if (string.IsNullOrWhiteSpace(Name))
             return RedirectToPage("/Error");
 
-        _logger.LogDebug("Getting pokemon: name={name}", name);
+        _logger.LogDebug("Getting pokemon: Name={Name}", Name);
 
+        Data = await _service.Get(Name);
 
         return Page();
     }

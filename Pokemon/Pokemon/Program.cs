@@ -35,7 +35,7 @@ app.MapRazorPages(); // this enable razor pages to be accessed by the routing mi
     /home/index
  */
 // app.MapControllerRoute(
-//     name: "default",
+//     Name: "default",
 //     pattern: "{controller=home}/{action=index}"); // aplica para toda ruta que sea un controlador seguido de una accion.
 //
 
