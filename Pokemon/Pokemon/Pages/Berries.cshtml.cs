@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Pokemon.Models.ViewModels;
 using Pokemon.Services;
 
 namespace Pokemon.Pages;
@@ -12,8 +13,11 @@ public class BerriesModel : PageModel
     {
         _service = service;
     }
-    public void OnGet()
+
+    public List<BerryItem> Berries { get; set; } = new();
+
+    public async Task OnGet()
     {
-        
+        Berries = (await _service.GetAll()).ToList();
     }
 }

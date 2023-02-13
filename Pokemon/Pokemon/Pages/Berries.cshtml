@@ -3,3 +3,40 @@
 @{
     ViewData["Title"] = "Berries";
 }
+
+<h1>Berries</h1>
+
+<div class="w-50">
+    <ul class="list-group">
+
+        @foreach (var berry in Model.Berries)
+        {
+            <li class="list-group-item">
+                <div class="container-fluid row">
+                    <div class="col-1">
+                        <img src="@berry.Sprite" alt="@berry.Name">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1">@berry.Name</h5>
+                            <small>$ @berry.Cost</small>
+                        </div>
+
+                        <p class="mb-1">@berry.Text</p>
+
+                    </div>
+                </div>
+            </li>
+        }
+        @* <li class="list-group-item container-fluid row"> *@
+        @*     <div class="col-1"> *@
+        @*         <img src="@Model.Berries.First().Sprite" alt="@Model.Berries.First().Name"> *@
+        @*     </div> *@
+        @*     <div class="col d-flex justify-content-between"> *@
+        @*         <h5 class="mb-1">@Model.Berries.First().Name</h5> *@
+        @*         <small>$ @Model.Berries.First().Cost</small> *@
+        @*     </div> *@
+        @* </li> *@
+
+    </ul>
+</div>

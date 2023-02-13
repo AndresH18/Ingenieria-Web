@@ -22,13 +22,12 @@ public class BerriesServiceTest
         var service = new BerriesService(_client, loggerMock.Object);
         
         // act
-        var result = await service.GetAll();
+        var result = (await service.GetAll()).ToArray();
         
         // assert
-        Assert.NotNull(result);
         Assert.NotEmpty(result);
         Assert.Equal("cheri-berry", result.First().Name);
-        Assert.NotEqual(0, result.First().Cost);
+        Assert.NotEqual(0, result[0].Cost);
     }
     
     [Fact]

@@ -18,7 +18,7 @@ public class BerriesService
         _client.GetNamedResourcePageAsync<Berry>().ContinueWith(r => _totalItems = r.Result.Count);
     }
 
-    public async Task<List<BerryItem>?> GetAll()
+    public async Task<IEnumerable<BerryItem>> GetAll()
     {
         try
         {
@@ -33,7 +33,7 @@ public class BerriesService
         catch (HttpRequestException ex)
         {
             if (ex.StatusCode == HttpStatusCode.NotFound)
-                return null;
+                return Enumerable.Empty<BerryItem>();
             _logger.LogError(ex, "Error while getting berries");
             throw;
         }
