@@ -38,3 +38,13 @@ Console.WriteLine("Getting data using Page link");
 
 pokemonList.ForEach(p =>
     Console.WriteLine($"name: {p.Name}, gif: {p.Sprites.Versions.GenerationV.BlackWhite.Animated.FrontDefault}"));
+
+
+Console.WriteLine("BERRIES");
+var berryItem = await client.GetResourceAsync<Item>(126);
+
+Console.WriteLine($"""
+Name: {berryItem.Name}
+Cost: {berryItem.Cost}
+Description: {string.Join("\n\t", berryItem.FlavorGroupTextEntries.Where(f => f.Language.Name == "en").Select(f => f.Text))}
+""");
