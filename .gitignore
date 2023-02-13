@@ -1,6 +1,7 @@
 ﻿# root
-*/.idea
-*.vscode
+# using ** means "zero or more sub-directories"
+**/.idea
+**/.vscode
 
 # Pokemon
 /Pokemon/Pokemon/obj/
