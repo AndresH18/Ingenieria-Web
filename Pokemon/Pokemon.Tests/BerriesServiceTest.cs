@@ -15,6 +15,23 @@ public class BerriesServiceTest
     }
 
     [Fact]
+    public async void Can_GetAll()
+    {
+        // arrange
+        var loggerMock = new Mock<ILogger<BerriesService>>();
+        var service = new BerriesService(_client, loggerMock.Object);
+        
+        // act
+        var result = await service.GetAll();
+        
+        // assert
+        Assert.NotNull(result);
+        Assert.NotEmpty(result);
+        Assert.Equal("cheri-berry", result.First().Name);
+        Assert.NotEqual(0, result.First().Cost);
+    }
+    
+    [Fact]
     public async void Can_Get_Berries()
     {
         // arrange

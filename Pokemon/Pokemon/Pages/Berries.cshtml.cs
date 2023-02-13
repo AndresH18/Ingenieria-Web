@@ -1,12 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Pokemon.Services;
 
-namespace Pokemon.Pages
+namespace Pokemon.Pages;
+
+public class BerriesModel : PageModel
 {
-    public class BerriesModel : PageModel
+    private readonly BerriesService _service;
+
+    public BerriesModel(BerriesService service)
     {
-        public void OnGet()
-        {
-        }
+        _service = service;
+    }
+    public void OnGet()
+    {
+        
     }
 }

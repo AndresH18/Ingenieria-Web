@@ -18,6 +18,32 @@ public class BerriesService
         _client.GetNamedResourcePageAsync<Berry>().ContinueWith(r => _totalItems = r.Result.Count);
     }
 
+    public async Task<List<BerryItem>?> GetAll()
+    {
+        try
+        {
+            var berriesPage = await _client.GetNamedResourcePageAsync<Berry>(_totalItems, 0);
+            var berriesList = await _client.GetResourceAsync(berriesPage.Results);
+            var itemsList = await _client.GetResourceAsync(berriesList.Select(b => b.Item).ToList());
+
+            var items = itemsList.Select(item => new BerryItem(item)).ToList();
+
+            return items;
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+                return null;
+            _logger.LogError(ex, "Error while getting berries");
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unexpected error.");
+            throw;
+        }
+    }
+
     public async Task<NamedApiResourceList<Berry>?> Get()
     {
         try
@@ -32,6 +58,11 @@ public class BerriesService
             _logger.LogError(ex, "Error while getting berries");
             throw;
         }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unexpected error.");
+            throw;
+        }
     }
 
     public async Task<BerryData?> Get(string berryName)
@@ -41,8 +72,8 @@ public class BerriesService
         try
         {
             var berry = await _client.GetResourceAsync<Berry>(berryName);
-            var item = await  _client.GetResourceAsync(berry.Item);
-            
+            var item = await _client.GetResourceAsync(berry.Item);
+
             return new BerryData(berry, item);
         }
         catch (HttpRequestException e)
@@ -50,6 +81,11 @@ public class BerriesService
             if (e.StatusCode == HttpStatusCode.NotFound)
                 return null;
             _logger.LogError(e, "Error while getting information for: {berryName}", berryName);
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unexpected error.");
             throw;
         }
     }
