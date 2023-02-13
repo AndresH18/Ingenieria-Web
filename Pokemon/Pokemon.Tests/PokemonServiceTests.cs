@@ -19,7 +19,7 @@ public class PokemonServiceTests
     {
         // arrange 
         var logMock = new Mock<ILogger<PokemonService>>();
-        var service = new PokemonService(_client, logMock.Object) { ItemsPerPage = 5 };
+        var service = new PokemonService(_client, logMock.Object) {ItemsPerPage = 5};
 
         // act
         var page1 = (await service.GetPageAsync()).Pokemon.OrderBy(p => p.Id).ToArray();
@@ -37,7 +37,7 @@ public class PokemonServiceTests
     {
         // arrange
         var logMock = new Mock<ILogger<PokemonService>>();
-        var service = new PokemonService(_client, logMock.Object) { ItemsPerPage = 3 };
+        var service = new PokemonService(_client, logMock.Object) {ItemsPerPage = 3};
 
         // act 
         var pokemon = await service.Get(145);
