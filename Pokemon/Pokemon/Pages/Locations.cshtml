@@ -5,5 +5,14 @@
     Layout = "Shared/_LocationLayout";
 }
 
+@if (RouteData.Values["region"] is string s)
+{
+    <h1>@s.ToUpper()</h1>
+}
 
-<h1>dsdsds</h1>
+<ul class="list-group">
+    @foreach (var location in Model.Locations)
+    {
+        <li class="list-group-item">@string.Join(" ", location.Split('-'))</li>
+    }
+</ul>
