@@ -1,4 +1,5 @@
 ﻿using PokeApiNet;
+using Pokemon.Models;
 
 namespace Pokemon.Services;
 
@@ -23,6 +24,23 @@ public class LocationsService
         catch (Exception e)
         {
             _logger.LogCritical(e, "Unexpected error while getting Regions");
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<string>> GetLocations(string region)
+    {
+        if (string.IsNullOrWhiteSpace(region))
+            return Enumerable.Empty<string>();
+        try
+        {
+            var regionResource = await _client.GetResourceAsync<Region>(region);
+
+            return regionResource.Locations.Select(r => r.Name).Order().ToList();
+        }
+        catch (Exception e)
+        {
+            _logger.LogCritical(e, "Unexpected error while getting locations for {region}", region);
             throw;
         }
     }
