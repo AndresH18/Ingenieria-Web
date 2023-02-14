@@ -7,6 +7,7 @@ namespace Pokemon.Pages;
 
 public class LocationsModel : PageModel
 {
+    private const int DefaultPageSize = 10;
     private readonly LocationsService _service;
 
     public LocationsModel(LocationsService service)
@@ -18,8 +19,10 @@ public class LocationsModel : PageModel
 
     public int CurrentPage => LocationsViewModel.PageInfo.CurrentPage;
     public int TotalPages => LocationsViewModel.PageInfo.TotalPages;
+    public int ItemsPerPage => LocationsViewModel.PageInfo.ItemsPerPage;
 
     public IEnumerable<string> Locations => LocationsViewModel.Locations;
+    public int I { get; set; }
 
 
     public async Task OnGet(int pageNumber, int size)
@@ -41,17 +44,19 @@ public class LocationsModel : PageModel
         }
     }
 
-    public async Task OnGetPrevious()
+    public async Task OnGetPrevious(int currentPage, int size)
     {
-        await OnGet(CurrentPage - 1, LocationsViewModel.PageInfo.ItemsPerPage);
+        await OnGet(currentPage - 1, size);
     }
 
-    public async Task OnGetNext()
+    public async Task OnGetNext(int currentPage, int size)
     {
-        await OnGet(CurrentPage + 1, LocationsViewModel.PageInfo.ItemsPerPage);
+        I++;
+        await OnGet(currentPage + 1, size);
     }
-    public async Task OnGetPage(int pageNumber)
+
+    public async Task OnGetPage(int pageNumber, int size)
     {
-        await OnGet(pageNumber, LocationsViewModel.PageInfo.ItemsPerPage);
+        await OnGet(pageNumber, size);
     }
 }
