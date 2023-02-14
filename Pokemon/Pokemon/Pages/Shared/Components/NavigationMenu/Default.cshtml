@@ -1,0 +1,12 @@
+﻿@model IEnumerable<string>
+
+<div class="d-grid gap-2">
+    @foreach (var region in Model)
+    {
+        <a class="btn @(region == ViewBag.SelectedRegion ? "btn-primary" : "btn-outline-secondary")"
+           asp-page="/Locations"
+           asp-route-region="@region">
+            @region
+        </a>
+    }
+</div>
