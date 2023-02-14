@@ -26,7 +26,7 @@ public class BerriesServiceTest
         
         // assert
         Assert.NotEmpty(result);
-        Assert.Equal("cheri-berry", result.First().Name);
+        Assert.Equal("CHERI", result.First().Name);
         Assert.NotEqual(0, result[0].Cost);
     }
     
