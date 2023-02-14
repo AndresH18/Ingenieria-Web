@@ -6,7 +6,7 @@
         <a class="btn @(region == ViewBag.SelectedRegion ? "btn-primary" : "btn-outline-secondary")"
            asp-page="/Locations"
            asp-route-region="@region">
-            @region
+            @region.ToUpper()
         </a>
     }
 </div>

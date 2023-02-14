@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using PokeApiNet;
-using Pokemon.Models;
 using Pokemon.Models.ViewModels;
 
 namespace Pokemon.Services;
@@ -37,7 +36,49 @@ public class LocationsService
         }
     }
 
-    public async Task<LocationsViewModel?> GetLocations(string region, int pageSize = 10, int pageOffset = 0)
+    public async Task<LocationsViewModel?> GetLocations(int pageSize, int pageOffset)
+    {
+        if (pageSize <= 0 || pageOffset < 0)
+            return null;
+
+        try
+        {
+            var locationPage = await _client.GetNamedResourcePageAsync<Location>(pageSize, pageOffset);
+            var locations = locationPage
+                .Results
+                .Select(l => l.Name)
+                .Order()
+                .Skip(pageSize * pageOffset)
+                .Take(pageSize);
+
+            return new LocationsViewModel
+            {
+                Locations = locations.ToList(),
+                PageInfo = new PageInfo
+                {
+                    TotalItems = locationPage.Count,
+                    ItemsPerPage = pageSize,
+                    CurrentPage = pageOffset + 1,
+                }
+            };
+        }
+        catch (HttpRequestException e)
+        {
+            if (e.StatusCode == HttpStatusCode.NotFound)
+                return null;
+            _logger.LogError(e, "Error while getting locations. pageSize={pageSize}, pageOffset={pageOffset}", pageSize,
+                pageOffset);
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogCritical(ex, "Unexpected error while getting locations. pageSize={pageSize}, pageOffset={pageOffset}", pageSize,
+                pageOffset);
+            throw;
+        }
+    }
+
+    public async Task<LocationsViewModel?> GetLocations(string region, int pageSize, int pageOffset)
     {
         if (string.IsNullOrWhiteSpace(region) || pageSize <= 0 || pageOffset < 0)
             return null;
@@ -52,7 +93,7 @@ public class LocationsService
                 .Skip(pageOffset * pageSize)
                 .Take(pageSize);
 
-            return new LocationsViewModel()
+            return new LocationsViewModel
             {
                 Region = region,
                 PageInfo = new PageInfo
@@ -76,5 +117,10 @@ public class LocationsService
             _logger.LogCritical(e, "Unexpected error while getting locations for {region}", region);
             throw;
         }
+    }
+
+    public async Task<LocationsViewModel?> GetLocations(string region)
+    {
+        return await GetLocations(region, 10, 0);
     }
 }

@@ -9,6 +9,10 @@
 {
     <h1>@s.ToUpper()</h1>
 }
+else
+{
+    <h1>Locations</h1>
+}
 
 <ul class="list-group">
     @if (Model.Locations.Any())
@@ -21,7 +25,7 @@
     else
     {
         <h2>There is nothing here. Weird, right?</h2>
-        <p class="h4">Check the api to see for your self <a class="link-info" href="https://pokeapi.co/api/v2/region/@Model.LocationsViewModel.Region.ToLower()">Here</a></p>
+        <p class="h4">Don't believe me? Check the api to see it for your self <a class="link-info" href="https://pokeapi.co/api/v2/region/@Model.LocationsViewModel.Region.ToLower()">Here</a></p>
     }
 </ul>
 
@@ -52,7 +56,7 @@
             }
         }
 
-        <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+        <li class="page-item @(Model.CurrentPage >= Model.TotalPages ? "disabled" : "")">
             <a class="page-link" aria-label="next"
                asp-page-handler="Next"
                asp-route-currentPage="@Model.CurrentPage"

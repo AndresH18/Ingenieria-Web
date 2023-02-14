@@ -31,17 +31,22 @@ public class LocationsModel : PageModel
         size = size >= 1 ? size : 10;
 
         var region = RouteData.Values["region"]?.ToString();
-        if (region != null)
-        {
-            // region selected, get region locations
-            LocationsViewModel = await _service.GetLocations(region, size, pageNumber) ?? new LocationsViewModel();
-            // CurrentPage = LocationsViewModel.PageInfo.CurrentPage;
-            // TotalPages = (int) Math.Ceiling(Locations.Count() / (double) _pageSize);
-        }
-        else
-        {
-            // no region, get all locations
-        }
+        // if (region != null)
+        // {
+        //     // region selected, get region locations
+        //     LocationsViewModel = await _service.GetLocations(region, size, pageNumber) ?? new LocationsViewModel();
+        //     // CurrentPage = LocationsViewModel.PageInfo.CurrentPage;
+        //     // TotalPages = (int) Math.Ceiling(Locations.Count() / (double) _pageSize);
+        // }
+        // else
+        // {
+        //     // no region, get all locations
+        //     LocationsViewModel = await _service.GetLocations(size, pageNumber) ?? new LocationsViewModel();
+        // }
+
+        LocationsViewModel = await (region != null
+            ? _service.GetLocations(region, size, pageNumber)
+            : _service.GetLocations(size, pageNumber)) ?? new LocationsViewModel();
     }
 
     public async Task OnGetPrevious(int currentPage, int size)
