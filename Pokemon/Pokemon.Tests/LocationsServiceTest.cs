@@ -33,6 +33,7 @@ public class LocationsServiceTest
     [Fact]
     public async void GetLocations_RegionEmpty_ReturnsEmpty()
     {
+        // arrange
         var loggerMock = new Mock<ILogger<LocationsService>>();
         var service = new LocationsService(_client, loggerMock.Object);
 
@@ -49,6 +50,7 @@ public class LocationsServiceTest
     [InlineData("hisui")]
     public async void GetLocations_RegionHasNoLocations_ReturnsEmpty(string region)
     {
+        // arrange
         var loggerMock = new Mock<ILogger<LocationsService>>();
         var service = new LocationsService(_client, loggerMock.Object);
 
@@ -71,5 +73,36 @@ public class LocationsServiceTest
     [InlineData("paldea")]
     public async void GetLocations_RegionHasLocations_ReturnsLocations(string region)
     {
+        // arrange
+        var loggerMock = new Mock<ILogger<LocationsService>>();
+        var service = new LocationsService(_client, loggerMock.Object);
+
+        // assert
+        var result = await service.GetLocations(region);
+
+        // assert
+        Assert.NotNull(result);
+        Assert.NotEmpty(result.Locations);
+    }
+
+    [Theory]
+    [InlineData("kanto", 2, -1)]
+    [InlineData("kanto", 0, 2)]
+    [InlineData("", 2, 2)]
+    [InlineData("", 0, 2)]
+    [InlineData("kanto", 0, -1)]
+    [InlineData("", 2, -1)]
+    [InlineData("", 0, -1)]
+    public async void GetLocations_InvalidParameters_ReturnsNull(string region, int pageSize, int pageOffset)
+    {
+        // arrange
+        var loggerMock = new Mock<ILogger<LocationsService>>();
+        var service = new LocationsService(_client, loggerMock.Object);
+
+        // assert
+        var result = await service.GetLocations(region, pageSize, pageOffset);
+
+        // assert
+        Assert.Null(result);
     }
 }

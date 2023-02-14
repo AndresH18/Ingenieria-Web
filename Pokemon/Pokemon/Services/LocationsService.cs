@@ -37,24 +37,6 @@ public class LocationsService
         }
     }
 
-    [Obsolete]
-    public async Task<IEnumerable<string>> GetLocation(string region, int pageSize = 10, int pageOffset = 0)
-    {
-        if (string.IsNullOrWhiteSpace(region) || pageSize <= 0 || pageOffset < 0)
-            return Enumerable.Empty<string>();
-        try
-        {
-            var regionResource = await _client.GetResourceAsync<Region>(region);
-
-            return regionResource.Locations.Select(r => r.Name).Order().ToList();
-        }
-        catch (Exception e)
-        {
-            _logger.LogCritical(e, "Unexpected error while getting locations for {region}", region);
-            throw;
-        }
-    }
-
     public async Task<LocationsViewModel?> GetLocations(string region, int pageSize = 10, int pageOffset = 0)
     {
         if (string.IsNullOrWhiteSpace(region) || pageSize <= 0 || pageOffset < 0)
