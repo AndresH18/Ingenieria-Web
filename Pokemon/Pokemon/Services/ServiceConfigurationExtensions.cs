@@ -9,6 +9,7 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<PokeApiClient>();
         services.AddScoped<PokemonService>();
         services.AddScoped<BerriesService>();
+        services.AddScoped<LocationsService>();
 
         return services;
     }
