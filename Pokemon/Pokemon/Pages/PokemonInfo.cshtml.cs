@@ -19,8 +19,7 @@ public class PokemonInfoModel : PageModel
 
     //
     // [BindProperty(SupportsGet = true)] public int Id { get; set; }
-    [BindProperty(SupportsGet = true)]
-    public string Name { get; set; }
+    [BindProperty(SupportsGet = true)] public string Name { get; set; } = default!;
     public PokemonData? Data { get; private set; }
 
     public async Task<IActionResult> OnGet()
