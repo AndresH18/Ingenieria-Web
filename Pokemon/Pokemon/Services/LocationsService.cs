@@ -47,9 +47,7 @@ public class LocationsService
             var locations = locationPage
                 .Results
                 .Select(l => l.Name)
-                .Order()
-                .Skip(pageSize * pageOffset)
-                .Take(pageSize);
+                .Order();
 
             return new LocationsViewModel
             {

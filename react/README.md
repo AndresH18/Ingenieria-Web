@@ -71,3 +71,8 @@ let nombre: string;
 
 <h1>Hola {nombre}</h1>
 ```
+
+## Virtual DOM vs DOM
+
+Cuando hay un cambio, el **Virtual DOM** cambia solo un pedazo de la página, mientras que el **DOM** recarga todo el
+contenido de la página
