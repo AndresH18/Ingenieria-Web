@@ -34,8 +34,7 @@ npm run dev
 Para crear un componente
 
 ```typescript jsx
-export const Primero
-() => {
+export const Primero = () => {
     return (
         <div>Primero</div>
     )
@@ -76,3 +75,6 @@ let nombre: string;
 
 Cuando hay un cambio, el **Virtual DOM** cambia solo un pedazo de la página, mientras que el **DOM** recarga todo el
 contenido de la página
+
+## Extension del navegador para desarrollar
+`React Dev Tools`
