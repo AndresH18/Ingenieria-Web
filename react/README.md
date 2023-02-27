@@ -8,7 +8,7 @@ Para crear aplicaciones en react se necesita `node`
 npx create-react-app <nombre-app> --template typescript
 ```
 
-Otra opción es usar vite, el problema es que no crea muchas de las configuraciones iniciales del proyect
+Otra opción es usar vite, el problema es que no crea muchas de las configuraciones iniciales del proyecto
 
 ```ps
 npm create vite@latest 
