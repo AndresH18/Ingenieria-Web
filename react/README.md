@@ -15,7 +15,7 @@ npm create vite@latest
 ....
 ```
 
-Seleccionar la opcion de react y typescript. Luego instalar las dependencias
+Seleccionar la opció,n de react y typescript. Luego instalar las dependencias
 
 ```ps
 npm i

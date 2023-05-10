@@ -1,4 +1,5 @@
-En el `App.tsx` estan unos componentes, el `Provider` es el componente principal de la aplicacion.
+En el `App.tsx` están unos componentes, el `Provider` es el componente principal de la aplicación.
+
 ```tsx
 function App() {
     return <>
